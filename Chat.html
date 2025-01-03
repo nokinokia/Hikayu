@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot</title>
+  <title>HIKAYU</title>
+  <link rel="icon" type="image/x-icon" href="img/logo.jpg">
  <style>
   /* Global styling */
 body {
@@ -295,7 +296,7 @@ body {
 
 <div id="chat-container">
   <div id="chat-body">
-    <div id="welcome-message">Welcome to $CHATAI, Say Help for more option</div>
+    <div id="welcome-message">Welcome to Hikayu AI Chat, Say Help for more option</div>
   </div> <!-- Tempat untuk pesan -->
   <div id="options-container" class="hidden"></div> <!-- Opsi pilihan -->
   <div id="input-container">
@@ -329,21 +330,21 @@ body {
   
     const socialMediaOptions = {
       "text": "Contact us on social media!",
-      "description": "Tap this for more info on social media $CHATAI.",
+      "description": "Tap this for more info on social media $HIKAYU.",
       "socialLinks": [
         {
           image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR66N-s5wV0YAvfZEgYeUwlfity4tiG62vRTw&s", // Twitter logo
-          link: "https://twitter.com/yourhandle",
+          link: "https://x.com/hikayuai",
           text: "Twitter"
         },
         {
           image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png", // Telegram logo
-          link: "https://t.me/yourhandle",
+          link: "https://t.me/HikayuAISOL",
           text: "Telegram"
         },
         {
           image: "https://play-lh.googleusercontent.com/_hfpAmN1g530V3k7GQkQWZiNJ545ZAinnQrORuWm7Jukt0tCZK5GLxJitE9mTJzPvA", // pump.fun logo
-          link: "https://dexscreener/yourhandle",
+          link: "#",
           text: "dexscreener"
         }
       ]
@@ -351,8 +352,8 @@ body {
   
     const options = {
       "1": {
-        text: "$CHATAI is simple and is created using HTML, CSS, and JavaScript. These bots can respond to specific messages.",
-        description: "An explanation of how this $CHATAI is made."
+        text: "$HIKAYU is simple and is created using HTML, CSS, and JavaScript. These bots can respond to specific messages.",
+        description: "An explanation of how this $HIKAYU is made."
       },
       "2": {
         text: socialMediaOptions.text,
@@ -360,10 +361,6 @@ body {
         socialLinks: socialMediaOptions.socialLinks
       },
       "3": {
-        text: "CA:XXXXXXXXXXXXXXXXXXXXXXXX",
-        description: "Tap this to see the CA $CHATAI."
-      },
-      "4": {
         text: "ThankYou!!!",
         description: "Exit"
       },
@@ -396,7 +393,7 @@ body {
         button.textContent = key;
         button.className = "option";
         button.onclick = () => {
-          appendMessage(`Pilihan Anda: ${key}`, "user");
+          appendMessage(`Your Choices: ${key}`, "user");
           appendMessage(options[key].text, "bot");
   
           // If the option contains social media links
@@ -417,7 +414,7 @@ body {
           }
   
           // Clear the chat and hide the options if option 4 is selected
-          if (key === "4") {
+          if (key === "3") {
             setTimeout(() => {
               chatBody.innerHTML = ""; // Clear chat
               optionsContainer.innerHTML = ""; // Clear options as well
