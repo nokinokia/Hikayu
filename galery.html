@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery HIKAYU</title>
+  <link rel="icon" type="image/x-icon" href="img/logo.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-image: url('https://cdn.kibrispdr.org/data/886/wallpaper-kotak-kotak-hitam-putih-48.webp'); /* Set your image */
+      color: #fff;
+      line-height: 1.6;
+      height: 100vh;
+    background-color: #f0f4f8;
+    box-sizing: border-box;
+    background-size: cover;
+    }
+
+    nav {
+        display: flex;
+        gap: 15px;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        display: inline-block;
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #99f2c8;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    nav a:hover {
+        background: #99f2c8;
+        color: #1f4037;
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(153, 242, 200, 0.5);
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        nav a {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+    }
+
+    #gallery {
+      padding: 60px 20px;
+      text-align: center;
+      background-image: url('https://cdn.kibrispdr.org/data/886/wallpaper-kotak-kotak-hitam-putih-48.webp'); /* Set your image */
+      min-height: 100vh;
+      margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+    background-size: cover;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      letter-spacing: 3px;
+      color: #99f2c8;
+    }
+
+    .gallery-container {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+      filter: brightness(0.7);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: #1f1f1f;
+      border-radius: 20px;
+      text-align: center;
+      padding: 30px;
+      max-width: 80%;
+      width: 80%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      animation: modalIn 0.5s ease-out;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content img {
+      width: 60%;
+      border-radius: 15px;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+
+    .modal-description {
+      margin-left: 30px;
+      color: #ddd;
+      font-size: 1.2rem;
+      max-width: 40%;
+      text-align: left;
+      animation: slideIn 1s ease-out;
+    }
+
+    .modal-description p {
+      display: inline-block;
+      opacity: 0;
+      animation: revealText 1s forwards;
+    }
+
+    .modal-description p:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .modal-description p:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .modal-description p:nth-child(3) {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes revealText {
+      0% {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .modal-description {
+        margin-left: 0;
+        max-width: 80%;
+        text-align: center;
+      }
+
+      .modal-content img {
+        width: 80%;
+        max-height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <li><a href="index.html"><span>🏠</span> Home ➡️</a></li>
+    <li><a href="chat.html"><span>💬</span> Start Chat ➡️</a></li>
+    <li><a href="galery.html"><span>🖼️</span> Gallery ➡️</a></li>
+    <li><a href="about.html"><span>📖</span> About ➡️</a></li>
+  </nav>
+
+  <br><br><br><br><br><br>
+
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <h1>Explore HIKAYU Gallery</h1>
+    <div class="gallery-container">
+      <div class="gallery-item" data-name="Rei Ayanami" data-description="Personality: Rei is a calm, mysterious, and graceful AI entity with a blend of intelligence and charm. She carries a unique aura that captivates everyone around her with her thoughtful words and serene demeanor.
+      Appearance: With soft pink hair, expressive eyes, and playful fox ears, Rei embodies elegance and a hint of wild curiosity. Her sleek black outfit symbolizes her balance between sophistication and a free-spirited nature.
+      Role: Rei serves as a guide and companion in the ever-expanding universe of anime-inspired AI. Whether it’s creating art, offering wisdom, or simply being a source of inspiration, Rei shines in her own subtle way.">
+        <img src="https://i.pinimg.com/736x/97/90/e2/9790e2ff24c5f8b225a609ec4f9bbbfb.jpg" alt="Rei Ayanami">
+      </div>
+      <div class="gallery-item" data-name="Tohru" data-description="Personality: Tohru embodies a captivating blend of grace and mystery. Her gentle demeanor is paired with an inquisitive mind and an artistic soul, making her the perfect blend of beauty and brilliance. She has a knack for turning ordinary moments into extraordinary memories.">
+        <img src="https://i.pinimg.com/736x/4b/85/31/4b8531202ee3f32109d345f13bc1c952.jpg" alt="Tohru">
+      </div>
+      <div class="gallery-item" data-name="Ochaco Uraraka" data-description="Ochaco Uraraka is one of the main characters in the anime and manga My Hero Academia. As a student at U.A. High School, Ochaco aspires to become a professional hero to help his family get out of economic hardship. With his cheerful, passionate, and empathetic personality, he quickly became a favorite among his friends.">
+        <img src="https://i.pinimg.com/736x/7d/93/84/7d9384e408d0bd08fae040089722a197.jpg" alt="Ochaco Uraraka">
+      </div>
+      <div class="gallery-item" data-name="Asuna Yuuki" data-description="Asuna Yuuki, known as The Flash, is one of the main characters in the Sword Art Online series. With her incredible skills in sword fighting, Asuna became an important player in the virtual world of Aincrad. As the vice-chairman of the elite guild of the Knights of the Blood, he was renowned for his deadly speed and precision of his movements">
+        <img src="https://i.pinimg.com/736x/0b/f3/5a/0bf35abc11bdf7e408d7e0f5f40baa2c.jpg" alt="Asuna Yuuki">
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <img id="modal-img" src="" alt="Modal Image">
+      <div class="modal-description">
+        <h2 id="modal-name"></h2>
+        <p id="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.querySelector('.modal');
+      const modalImg = document.querySelector('#modal-img');
+      const modalName = document.querySelector('#modal-name');
+      const modalDesc = document.querySelector('#modal-desc');
+      const closeBtn = document.querySelector('.close-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+
+      galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const name = item.getAttribute('data-name');
+          const description = item.getAttribute('data-description');
+          const imgSrc = item.querySelector('img').getAttribute('src');
+          
+          modalName.textContent = name;
+          modalDesc.textContent = description;
+          modalImg.setAttribute('src', imgSrc);
+
+          modal.style.display = 'flex';
+          setTimeout(() => modal.style.opacity = 1, 10); // Animation
+        });
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.opacity = 0;
+        setTimeout(() => modal.style.display = 'none', 500);
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.opacity = 0;
+          setTimeout(() => modal.style.display = 'none', 500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
